@@ -1,10 +1,20 @@
+#pragma once
+
 #include "pch.h"
 #include "Game.h"
+#include "LevelManager.h"
+#include "Level.h"
 #include "Character.h"
+#include "Camera.h"
+#include "Slime.h"
 
 Game::Game( const Window& window ) 
-	:m_Window{ window },
-	m_pCharacter{new Character{Point2f(0,0)}}
+	:m_Window{ window }
+	,m_pLevelManager{new LevelManager()}
+	//,m_pLevel{new Level()}
+	,m_pCharacter{ new Character(Point2f{0,0}) }
+	,m_pCamera{new Camera(640, 576)}
+	,m_pSlime{new Slime(Point2f{100,0})}
 {
 	Initialize( );
 }
@@ -16,12 +26,15 @@ Game::~Game( )
 
 void Game::Initialize( )
 {
-	
+	//m_pLevelManager->AddLevel(new Level());
 }
 
 void Game::Cleanup( )
 {
+	delete m_pLevelManager;
 	delete m_pCharacter;
+	delete m_pCamera;
+	delete m_pSlime;
 }
 
 void Game::Update( float elapsedSec )
@@ -38,13 +51,22 @@ void Game::Update( float elapsedSec )
 	//}
 
 	m_pCharacter->Update(elapsedSec);
+	m_pSlime->Update(elapsedSec);
 }
 
 void Game::Draw( ) const
 {
 	ClearBackground( );
 
+	glPushMatrix();
+
+	m_pCamera->Transform(m_pCharacter->GetShape());
+
+	m_pSlime->Draw();
+
 	m_pCharacter->Draw();
+
+	glPopMatrix();
 }
 
 void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )
