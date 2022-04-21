@@ -54,6 +54,9 @@
     <ClCompile Include="Core.cpp">
       <Filter>Framework Files</Filter>
     </ClCompile>
+    <ClCompile Include="Slime.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -90,6 +93,9 @@
       <Filter>Framework Files</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
+      <Filter>Game Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Slime.h">
       <Filter>Game Files</Filter>
     </ClInclude>
   </ItemGroup>
