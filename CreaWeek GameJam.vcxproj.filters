@@ -54,9 +54,39 @@
     <ClCompile Include="Core.cpp">
       <Filter>Framework Files</Filter>
     </ClCompile>
+    <ClCompile Include="Slime.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OAMEntry.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OAMTable.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WormWalking_1.c">
+      <Filter>Game Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
+      <Filter>Framework Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
       <Filter>Framework Files</Filter>
     </ClInclude>
     <ClInclude Include="Matrix2x3.h">
@@ -89,7 +119,31 @@
     <ClInclude Include="Character.h">
       <Filter>Game Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
+    <ClInclude Include="Camera.h">
+      <Filter>Game Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Slime.h">
+      <Filter>Game Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelManager.h">
+      <Filter>Framework Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OAMEntry.h">
+      <Filter>Framework Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OAMTable.h">
+      <Filter>Framework Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Game Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WormWalking_1.h">
+      <Filter>Framework Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Game Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
       <Filter>Game Files</Filter>
     </ClInclude>
   </ItemGroup>

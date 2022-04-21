@@ -1,6 +1,10 @@
 #pragma once
 
 class Character;
+class Camera;
+class Slime;
+class LevelManager;
+class Level;
 
 class Game final
 {
@@ -26,7 +30,12 @@ private:
 	// DATA MEMBERS
 	const Window m_Window;
 
+	LevelManager* m_pLevelManager;
+	Level* m_pLevel;
+
 	Character* m_pCharacter;
+	Camera* m_pCamera;
+	Slime* m_pSlime;
 
 	// FUNCTIONS
 	void Initialize( );
