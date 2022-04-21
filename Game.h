@@ -1,6 +1,6 @@
 #pragma once
 
-class Slime;
+class Character;
 
 class Game final
 {
@@ -26,7 +26,7 @@ private:
 	// DATA MEMBERS
 	const Window m_Window;
 
-	Slime* m_pSlime;
+	Character* m_pCharacter;
 
 	// FUNCTIONS
 	void Initialize( );

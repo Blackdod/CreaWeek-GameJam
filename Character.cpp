@@ -1,25 +1,47 @@
 #include "pch.h"
 #include "Character.h"
+#include "utils.h"
 #include <iostream>
 
-Character::Character() :
-	m_Shape{},
+Character::Character(const Point2f& pos) :
+	m_Shape{ pos.x, pos.y, 50, 70 },
 	m_Velocity{},
 	m_JumpSpeed{ 600 },
 	m_State{ State::idle },
-	m_Gravity{ -1000 },
+	m_Gravity{ -1200 },
 	m_HorSpeed{ 300 },
 	m_HasPressedJump{},
-	m_HasDashed{}
+	m_IsFacingRight{ true },
+	m_DashTimer{}
 {}
+
+
+void Character::Draw() const
+{
+	utils::SetColor(Color4f(1, 0, 0, 1));
+	utils::FillRect(m_Shape);
+}
 
 void Character::Update(float elapsedSec)
 {
 	m_Shape.bottom += m_Velocity.y * elapsedSec;
 	m_Shape.left += m_Velocity.x * elapsedSec;
-	m_Velocity.y += m_Gravity * elapsedSec;
 
-	HandleKeyInputs();
+	if (m_State != State::dash)
+		HandleKeyInputs();
+
+	//testing collsion
+	if (m_Shape.bottom <= 0)
+	{
+		m_Shape.bottom = 0;
+	}
+	else
+		m_Velocity.y += m_Gravity * elapsedSec;
+
+	if (m_Velocity.x > 0) m_IsFacingRight = true;
+	else if (m_Velocity.x < 0) m_IsFacingRight = false;
+
+	Dash(elapsedSec);
 }
 
 void Character::HandleKeyInputs()
@@ -46,15 +68,37 @@ void Character::HandleKeyInputs()
 	{
 		m_State = State::jump;
 		m_Velocity.y = m_JumpSpeed;
+		m_HasPressedJump = true;
+	}
+	if (!pStates[SDL_SCANCODE_K] && m_Shape.bottom <= 2)
+	{
+		m_HasPressedJump = false;
 	}
 
-	if (pStates[SDL_SCANCODE_J] && !m_HasDashed)
+	if (pStates[SDL_SCANCODE_J] && m_DashTimer == 0)
 	{
-		const float dashDistance{ 30 };
 		m_State = State::dash;
-		if (m_IsFacingRight) m_Shape.left += dashDistance;
-		else m_Shape.left -= dashDistance;
-		m_HasDashed = true;
+	}
+	if (!pStates[SDL_SCANCODE_J] && m_Shape.bottom <= 2)
+		m_DashTimer = 0;
+}
+
+
+void Character::Dash(float elapsedSec)
+{
+	if (m_State == State::dash)
+	{
+		const float dashSpeed{ 1000 };
+		m_DashTimer += elapsedSec;
+		if (m_DashTimer >= 0.14f)
+		{
+			m_State = State::idle;
+		}
+		else
+		{
+			if (m_IsFacingRight) m_Velocity.x = dashSpeed;
+			else m_Velocity.x = -dashSpeed;
+		}
 	}
 }
 

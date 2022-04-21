@@ -1,10 +1,10 @@
 #include "pch.h"
 #include "Game.h"
-#include "Slime.h"
+#include "Character.h"
 
 Game::Game( const Window& window ) 
-	:m_Window{ window }
-	,m_pSlime{new Slime(Point2f{0,0})}
+	:m_Window{ window },
+	m_pCharacter{new Character{Point2f(0,0)}}
 {
 	Initialize( );
 }
@@ -21,7 +21,7 @@ void Game::Initialize( )
 
 void Game::Cleanup( )
 {
-	delete m_pSlime;
+	delete m_pCharacter;
 }
 
 void Game::Update( float elapsedSec )
@@ -37,14 +37,14 @@ void Game::Update( float elapsedSec )
 	//	std::cout << "Left and up arrow keys are down\n";
 	//}
 
-	m_pSlime->Update(elapsedSec);
+	m_pCharacter->Update(elapsedSec);
 }
 
 void Game::Draw( ) const
 {
 	ClearBackground( );
 
-	m_pSlime->Draw();
+	m_pCharacter->Draw();
 }
 
 void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )
